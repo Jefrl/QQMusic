@@ -9,7 +9,7 @@
 import UIKit
 
 class QQDataTool: NSObject {
-    
+    /// 获取歌曲信息简介的 模型数组
     class func getMusicListData() -> [QQMusicModel] {
         
         guard let path = Bundle.main.path(forResource: "Musics.plist", ofType: nil) else {
@@ -30,6 +30,7 @@ class QQDataTool: NSObject {
         return musicMs
     }
     
+    /// 获取歌曲中歌词信息的 模型数组
     class func getLrcMData(_ lrcName: String) -> [QQLrcModel] {
         guard let path = Bundle.main.path(forResource: lrcName, ofType: nil) else {
             return [QQLrcModel]()
@@ -47,7 +48,7 @@ class QQDataTool: NSObject {
             return [QQLrcModel]()
         }
         
-        // 3. 解析歌词
+        // 解析歌词
         var lrcMs = [QQLrcModel]()
         
         let lrcStrArray = verLrcContent.components(separatedBy: "\n")
@@ -62,6 +63,7 @@ class QQDataTool: NSObject {
             // 删除没必要的数据
             let resultStr = lrcStr.replacingOccurrences(of: "[", with: "")
             
+            // 内容字符串中, 区分开 时间与歌词, 换行
             let timeAndLrc = resultStr.components(separatedBy: "]")
             
             if timeAndLrc.count == 2 {
@@ -88,7 +90,7 @@ class QQDataTool: NSObject {
         return lrcMs
     }
     
-    
+    /// 获取当前播放歌词的 (为第几行和 当前歌曲中歌词信息的 模型) 的元祖
     class func getRowLrcM(_ lrcMs: [QQLrcModel], currentTime: TimeInterval) -> (row: Int, lrcM: QQLrcModel?) {
         
         for i in 0..<lrcMs.count {

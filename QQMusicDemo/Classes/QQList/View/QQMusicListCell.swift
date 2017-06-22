@@ -60,7 +60,7 @@ class QQMusicListCell: UITableViewCell {
         case .rotate:
             self.layer.removeAnimation(forKey: "hxl_rotation")
             let animation = CAKeyframeAnimation(keyPath: "transform.rotation.x")
-            animation.values = [-2/3 * M_PI, 0, 2/3 * M_PI, 0]
+            animation.values = [(-2.0/3.0) * .pi, 0, (2.0/3.0) * .pi, 0]
             animation.duration = 0.7
             animation.repeatCount = 2
             self.layer.add(animation, forKey: "hxl_rotation")

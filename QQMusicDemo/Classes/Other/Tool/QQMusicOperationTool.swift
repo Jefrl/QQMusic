@@ -12,8 +12,6 @@ import MediaPlayer
 class QQMusicOperationTool: NSObject {
     // 记录上次的行号
     var lastRow: Int = 0
-    // 图片
-    var artwork: MPMediaItemArtwork?
 
     // 创建 QQ 音乐的操作工具单例
     static let shareInstance = QQMusicOperationTool()
@@ -53,7 +51,7 @@ class QQMusicOperationTool: NSObject {
         return musicMessageM
     }    
     
-    /// 操作单例提供的方法
+    /// 操作单例 所提供给外界的方法
     /// - Parameter musicM: 播放音乐
     func playMusic(_ musicM: QQMusicModel) {
         // 让 MusicTool 去播放音乐
@@ -100,7 +98,7 @@ extension QQMusicOperationTool {
         // 0. 取出需要展示的信息模型
         let musicMessageM = getMusicMessageM()
         
-        // 1. 获取锁屏中心
+        // 1. 获取锁屏中心 对象
         let infoCenter = MPNowPlayingInfoCenter.default()
         
         // 1.1 创建显示信息的字典
@@ -117,8 +115,12 @@ extension QQMusicOperationTool {
         
         let imageNname = musicMessageM.musicM?.icon
         
+        // 图片
+        var artwork: MPMediaItemArtwork?
+        
         if imageNname != nil {
             let image = UIImage(named: imageNname!)
+            
             if image != nil
             {
                 // 1. 获取歌词, 添加歌词, 到图片上, 组成一张新的图片, 来展示

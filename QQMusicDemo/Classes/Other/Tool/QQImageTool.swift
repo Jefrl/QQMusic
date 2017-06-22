@@ -23,6 +23,7 @@ class QQImageTool: NSObject {
         sourceImage.draw(in: CGRect(x: 0, y: 0, width: sourceImage.size.width, height: sourceImage.size.height))
         
         // 将文字绘制上去
+        // 获取段落风格对象, 设置好居中
         let style: NSMutableParagraphStyle = NSMutableParagraphStyle()
         style.alignment = .center
         
@@ -31,10 +32,9 @@ class QQImageTool: NSObject {
             NSForegroundColorAttributeName : UIColor.white,
                        NSFontAttributeName : UIFont.systemFont(ofSize: 18),
              NSParagraphStyleAttributeName : style
-        
         ]
         
-        
+        // Text 文字 draw 画好
         (text! as NSString).draw(in: CGRect(x: 0, y: 0, width: sourceImage.size.width, height: 28), withAttributes: dic)
         
         // 合成获取图片

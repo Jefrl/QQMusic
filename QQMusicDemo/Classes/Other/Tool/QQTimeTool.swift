@@ -9,7 +9,7 @@
 import UIKit
 
 class QQTimeTool: NSObject {
-
+    /// 获取格式化时间
     class func getFormatTime(_ time: TimeInterval) -> String {
         let min = Int(time + 0.5) / 60
         let sec = Int(time + 0.5) % 60
@@ -17,6 +17,7 @@ class QQTimeTool: NSObject {
         return String(format: "%02d:%02d", min, sec)
     }
     
+    /// 获取 TimeInterval 类型的时间
     class func getTime(_ formatTime: String) -> TimeInterval {
         let minSec = formatTime.components(separatedBy: ":")
         if minSec.count == 2 {

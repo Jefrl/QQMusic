@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation // 音视频框架
 
-class QQMusicTool: NSObject, AVAudioPlayerDelegate {
+class QQMusicTool: NSObject {
     override init() {
         // info.plist 里加入后台播放设置
         let session = AVAudioSession.sharedInstance()
@@ -31,6 +31,7 @@ class QQMusicTool: NSObject, AVAudioPlayerDelegate {
             return
         }
         
+        // 判断是否是同一首
         if player?.url == url {
             player?.play()
             return
@@ -72,7 +73,9 @@ class QQMusicTool: NSObject, AVAudioPlayerDelegate {
 
 let kPlayerFinishNotification = "playFinish"
 
-extension QQMusicTool {
+
+// MARK: - 实现音频代理方法
+extension QQMusicTool: AVAudioPlayerDelegate {
 
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         print("播放完成后")

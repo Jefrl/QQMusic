@@ -63,6 +63,8 @@ extension QQDetailVC {
         setUpOnce()
         setSlider()
         
+        // 设置好通知
+        setupNotification()
         // 设置歌词背景视图(动画使用)
         setLrcBackView()
         // 添加了一个歌词视图
@@ -210,6 +212,11 @@ extension QQDetailVC {
         // 将白点, 这个控制器负责的就是, 拿歌词数据(具体怎么拿, 工具类) -> 展示歌词数据(具体怎么展示, 别的控制器)
     }
     
+    // 设置通知
+    func setupNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(nextMusic), name: NSNotification.Name(rawValue: kPlayerFinishNotification), object: nil)
+    }
+    
     // 进度条设置
     func setSlider() -> () {
         //progressSlider.minimumTrackTintColor
@@ -270,7 +277,7 @@ extension QQDetailVC {
         // 创建动画对象
         let animation = CABasicAnimation(keyPath: "transform.rotation.z")
         animation.fromValue = 0
-        animation.toValue = M_PI * 2
+        animation.toValue = Double.pi * 2
         // 从 fromValue 到 toValue 花费时长
         animation.duration = 30
         animation.repeatCount = MAXFLOAT
